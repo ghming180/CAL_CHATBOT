@@ -1,2 +1,139 @@
 在command 里面运行
 streamlit run main.py
+
+
+
+
+
+
+
+
+# Cal.com 智能助手项目
+
+## 项目概述
+
+这是一个基于 OpenAI 函数调用能力的智能聊天机器人，可以与 Cal.com API 交互，帮助用户管理日程安排。项目实现了以下核心功能：
+
+- 创建新会议预约
+- 查看用户预定会议列表
+- 取消已有会议
+- 查询可用时间段
+
+## 功能特点
+
+✅ **智能对话交互** - 通过自然语言处理用户请求  
+✅ **多时区支持** - 自动处理不同时区的时间转换  
+✅ **错误恢复** - 智能处理API错误并提供友好提示  
+✅ **Web界面** - 基于Streamlit的交互式界面  
+
+## 技术栈
+
+- **Python 3.9+**
+- OpenAI API (函数调用功能)
+- Cal.com REST API
+- Streamlit (Web界面)
+- Pytz (时区处理)
+- Requests (HTTP请求)
+
+## 环境配置
+
+1. 克隆仓库：
+   ```bash
+   git clone https://github.com/yourusername/cal-chatbot.git
+   cd cal-chatbot
+   ```
+
+2. 创建虚拟环境：
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/Mac
+   venv\Scripts\activate     # Windows
+   ```
+
+3. 安装依赖：
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. 创建 `.env` 文件并配置：
+   ```
+   OPENAI_API_KEY=your_openai_api_key
+   CAL_API_KEY=your_cal.com_api_key
+   CAL_USERNAME=your_cal.com_username
+   ```
+
+## 文件结构
+
+```
+cal_chatbot/
+├── cal_api.py          # Cal.com API 封装
+├── functions.py        # OpenAI 函数定义
+├── main.py             # Streamlit 主界面
+├── openai_chatbot.py   # 聊天机器人逻辑
+├── requirements.txt    # 依赖列表
+└── .env.example        # 环境变量示例
+```
+
+## 运行项目
+
+启动Streamlit应用：
+```bash
+streamlit run main.py
+```
+
+应用将在默认浏览器中打开：`http://localhost:8501`
+
+## 使用示例
+
+1. **创建会议**：
+   ```
+   用户：帮我预约明天下午3点的30分钟会议，主题是项目讨论
+   助手：好的，请提供您的邮箱地址...
+   ```
+
+2. **查看会议**：
+   ```
+   用户：显示我所有的预定会议
+   助手：您有以下预定会议...
+   ```
+
+3. **取消会议**：
+   ```
+   用户：取消今天下午4点的会议
+   助手：已取消今天下午4点的会议
+   ```
+
+## API功能列表
+
+| 功能 | 方法 | 描述 |
+|------|------|------|
+| 获取事件类型 | `get_event_types()` | 获取用户所有事件类型 |
+| 查询可用时段 | `get_available_slots()` | 查询指定日期的可用时间段 |
+| 创建预约 | `book_event()` | 创建新会议预约 |
+| 列出预约 | `list_events()` | 列出用户所有预约 |
+| 取消预约 | `cancel_event()` | 取消指定预约 |
+
+## 常见问题
+
+**Q: 为什么查询可用时间段失败？**  
+A: 请检查：
+- Cal.com API密钥是否正确
+- 用户名格式是否正确（如`cal.com/username`）
+- 事件类型slug是否有效
+
+**Q: 预订会议时出现时区错误？**  
+A: 确保：
+- 系统时区设置正确
+- 所有时间都明确指定时区
+- Cal.com账户时区设置正确
+
+## 贡献指南
+
+欢迎提交Pull Request！请确保：
+1. 遵循现有代码风格
+2. 添加适当的单元测试
+3. 更新相关文档
+
+## 许可证
+
+MIT License
